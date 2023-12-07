@@ -1,0 +1,20 @@
+{
+  "name": "msis207.012.cttt-api-finalpreject",
+  "version": "1.0.0",
+  "description": "API of Final project in class MSIS207.012.CTTT belong to student who have SID 20521472",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.2",
+    "package.json": "^2.0.1"
+  }
+}
