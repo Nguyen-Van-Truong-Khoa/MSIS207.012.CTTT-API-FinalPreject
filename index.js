@@ -26,7 +26,7 @@ mongoose.connection.on("disconnected", () => {
 
 //middlewares
 app.use(cors({
-  origin: [`${process.env.clientURL}`],
+  origin: [`${process.env.clientURL}`,"http://localhost:3000"],
   credentials: true
   }))
 app.use(cookieParser())
