@@ -26,7 +26,7 @@ mongoose.connection.on("disconnected", () => {
 
 //middlewares
 app.use(cors({
-  origin: [`${process.env.clientURL}`,"http://localhost:3000"],
+  origin: [`${process.env.clientURL}`,"http://localhost:3000", "https://msis-207-012-cttt-ui-client-final-preject-kt4e8t8pb.vercel.app/"],
   credentials: true
   }))
 app.use(cookieParser())
@@ -52,3 +52,5 @@ app.listen(4000, () => {
   connect();
   console.log("Connected to backend.");
 });
+
+
