@@ -1,7 +1,7 @@
 {
-  "name": "msis207.012.cttt-api-finalpreject",
-  "version": "1.0.0",
-  "description": "API of Final project in class MSIS207.012.CTTT belong to student who have SID 20521472",
+  "name": "Hotel Booking Webapp api document",
+  "version": "0.0.0",
+  "description": "20521472-msis207.012.cttt-api-doc-finalproject",
   "apidoc": {
     "title": "Hotel Booking Webapp api",
     "url" : "https://final-project-api-r57i.onrender.com"
@@ -10,7 +10,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "gen_api_doc": "apidoc -i ./routes/ -o ./public/docs/"
+    "gen_api_doc": "apidoc -i ./routes/ -o ../MSIS207.012.CTTT-API-Doc-FinalPreject"
   },
   "keywords": [],
   "author": "",

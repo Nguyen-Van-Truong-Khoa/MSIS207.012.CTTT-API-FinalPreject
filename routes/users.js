@@ -12,13 +12,30 @@ const router = express.Router();
 //UPDATE
 router.put("/:id", verifyUser, updateUser);
 /**
-     * @api {put} /api/:id Update One
+     * @api {put} /api/users/:id Update One user
      * @apiName UpdateOne
      * @apiGroup Users
-     * @apiPermission secured admin
-     *
-     * @apiDescription Update one account
-     *
+     * @apiPermission authenticated user or admin
+     * 
+     * @apiDescription Update particular user's information
+     * 
+     * @apiParam  {String} _id the ID of account
+     * 
+     * @apiExample Example usage:
+     * curl -i https://final-project-api-r57i.onrender.com/api/users/657fc52437d77ff9aa7fad4e
+     * 
+     * @apiBody  {String} username username of account
+     * @apiBody  {String} email email of account
+     * @apiBody  {String} country country of account
+     * @apiBody  {String} city city of account
+     * @apiBody  {String} phone phone of account
+     * @apiBody  {String} password encrypted password of account
+     * 
+     * @apiBodyExample {json} Input
+     *    {
+     *     "phone": "123435553"
+     *    }
+     * 
      * @apiSuccess {String} _id the ID of account
      * @apiSuccess {String} username username of account
      * @apiSuccess {String} email email of account
@@ -29,7 +46,7 @@ router.put("/:id", verifyUser, updateUser);
      * @apiSuccess {String} isAdmin isAdmin check
      * @apiSuccess {String} createdAt created date of account
      * @apiSuccess {String} updatedAt updated date of account
-     * @apiSuccess {String} __v don't know
+     * @apiSuccess {String} __v the schema version field name
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -39,7 +56,7 @@ router.put("/:id", verifyUser, updateUser);
      *           "email": "customer@gm.uit.edu.vn",
      *           "country": "vietnam",
      *           "city": "hcm",
-     *           "phone": "012128900",
+     *           "phone": "123435553",
      *           "password": "$2a$10$DM3xKzOc0eiY2huOUe37EucOwTYeoQ56oxoQZVNzIcfzeOx7flCbC",
      *           "isAdmin": false,
      *           "createdAt": "2023-12-14T15:33:36.139Z",
@@ -47,57 +64,56 @@ router.put("/:id", verifyUser, updateUser);
      *           "__v": 0
      *       }
      *
-     * @apiError invalid input data
+     * @apiError unauthenticated
      *
      * @apiErrorExample Error-Response:
-     *     HTTP/1.1 400 Bad Request
+     *     HTTP/1.1 401 unauthenticated
      *     {
-     *       "result": "fail",
-     *       "message": "invalid input"
+     *       "message": "You are not authenticated!"
      *     }
+     * 
      */
 
 //DELETE
 router.delete("/:id", verifyUser, deleteUser);
 /**
-     * @api {delete} /api/:id Delete One
+     * @api {delete} /api/users/:id Delete One
      * @apiName deleteOne
      * @apiGroup Users
-     * @apiPermission secured admin
+     * @apiPermission authenticated user or admin
      *
-     * @apiDescription Delete one account
+     * @apiDescription Delete particular user
      *
      * @apiParam {string} id ID of user, on params
      *
      * @apiExample Example usage:
-     * curl -i https://final-project-api-r57i.onrender.com/api/users/657b2050d0acd2a0f4872335
+     * curl -i https://final-project-api-r57i.onrender.com/api/users/657fc52437d77ff9aa7fad4e
      *
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
      *     {
      *          "message": "User deleted"
-     *       }
+     *     }
      *
-     * @apiError invalid input data
+     * @apiError unauthenticated
      *
      * @apiErrorExample Error-Response:
-     *     HTTP/1.1 400 Bad Request
+     *     HTTP/1.1 401 unauthenticated
      *     {
-     *       "result": "fail",
-     *       "message": "invalid input"
+     *       "message": "You are not authenticated!"
      *     }
      */
 
 //GET
 router.get("/:id", verifyUser, getUser);
 /**
-     * @api {GET} /api/:id Get One
+     * @api {GET} /api/users/:id Get One user information
      * @apiName getOne
      * @apiGroup Users
-     * @apiPermission secured admin
+     * @apiPermission authenticated user or admin
      *
-     * @apiDescription Get one user
+     * @apiDescription Get particular user information
      *
      * @apiParam {string} id ID of user, on params
      *
@@ -114,7 +130,7 @@ router.get("/:id", verifyUser, getUser);
      * @apiSuccess {String} isAdmin isAdmin check
      * @apiSuccess {String} createdAt created date of account
      * @apiSuccess {String} updatedAt updated date of account
-     * @apiSuccess {String} __v don't know
+     * @apiSuccess {String} __v the schema version field name
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -132,26 +148,24 @@ router.get("/:id", verifyUser, getUser);
      *           "__v": 0
      *       }
      *
-     * @apiError invalid input data
+     * @apiError unauthenticated
      *
      * @apiErrorExample Error-Response:
-     *     HTTP/1.1 400 Bad Request
+     *     HTTP/1.1 401 unauthenticated
      *     {
-     *       "result": "fail",
-     *       "message": "invalid input"
+     *       "message": "You are not authenticated!"
      *     }
      */
 
 //GET ALL
 router.get("/", verifyAdmin, getUsers);
 /**
-     * @api {GET} /api/:id Get All
-     * @apiName getAll
+     * @api {GET} /api/users Get All user information
+     * @apiName getAllUser
      * @apiGroup Users
-     * @apiPermission secured admin
+     * @apiPermission admin
      *
-     * @apiDescription Get all user
-     *
+     * @apiDescription Get all user information
      *
      * @apiExample Example usage:
      * curl -i https://final-project-api-r57i.onrender.com/api/users/
@@ -166,7 +180,7 @@ router.get("/", verifyAdmin, getUsers);
      * @apiSuccess {Boolean} isAdmin isAdmin check
      * @apiSuccess {String} createdAt created date of account
      * @apiSuccess {String} updatedAt updated date of account
-     * @apiSuccess {String} __v don't know
+     * @apiSuccess {String} __v the schema version field name
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -184,13 +198,12 @@ router.get("/", verifyAdmin, getUsers);
      *           "__v": 0
      *       }
      *
-     * @apiError invalid input data
+     * @apiError unauthenticated
      *
      * @apiErrorExample Error-Response:
-     *     HTTP/1.1 400 Bad Request
+     *     HTTP/1.1 401 unauthenticated
      *     {
-     *       "result": "fail",
-     *       "message": "invalid input"
+     *       "message": "You are not authenticated!"
      *     }
      */
 

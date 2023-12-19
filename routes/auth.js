@@ -5,12 +5,12 @@ const router = express.Router();
 
 router.post("/register", register)
 /**
-     * @api {POST} /api/auth/register Create One
-     * @apiName createOne
-     * @apiGroup Authentication
-     * @apiPermission Every type of user
+     * @api {POST} /api/auth/register Create user
+     * @apiName createNewUser
+     * @apiGroup Register
+     * @apiPermission Every type of user except login-user
      *
-     * @apiDescription Create one account
+     * @apiDescription Create new user
      *
      * @apiBody {String} username the unique name of user for login
      * @apiBody {String} email the email of user.
@@ -18,6 +18,17 @@ router.post("/register", register)
      * @apiBody {String} phone phone of user
      * @apiBody {String} country country of user
      * @apiBody {String} city city of user
+     * 
+     * @apiBodyExample  {json} Input
+     * 
+     * {
+     *     "username": "customer3", 
+     *     "email": "customer3@gm.uit.edu.vn",
+     *     "password" : "123456789",
+     *     "phone" : "012128900",
+     *     "country" : "vietnam",
+     *     "city" : "hcm"
+     * }
      * 
      * @apiExample Example usage:
      * curl -i https://final-project-api-r57i.onrender.com/api/auth/register
@@ -29,13 +40,13 @@ router.post("/register", register)
      *          "message" "User has been created."
      *     }
      *
-     * @apiError invalid input data
+     * @apiError Exist username, email
      *
      * @apiErrorExample Error-Response:
-     *     HTTP/1.1 400 Bad Request
+     *     HTTP/1.1 500 Internal Server Error
      *     {
-     *       "result": "fail",
-     *       "message": "invalid input"
+     *       "success": false,
+     *       "message": "E11000 duplicate key error collection: test.users index: username_1 dup key: { username: \"customer3\" }"
      *     }
      */
 
@@ -47,7 +58,7 @@ router.post("/login", login)
      * @apiGroup Authentication
      * @apiPermission Every type of user
      *
-     * @apiDescription Login account
+     * @apiDescription Login to particular user account
      *
      * @apiBody {String} username the unique name of user for login
      * @apiBody {String} password password of user
@@ -66,7 +77,7 @@ router.post("/login", login)
      * @apiSuccess {String} isAdmin isAdmin check
      * @apiSuccess {String} createdAt created date of account
      * @apiSuccess {String} updatedAt updated date of account
-     * @apiSuccess {String} __v don't know
+     * @apiSuccess {String} __v the schema version field name
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
@@ -84,13 +95,13 @@ router.post("/login", login)
      *           "__v": 0
      *       }
      *
-     * @apiError invalid input data
+     * @apiError Wrong password or username
      *
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 400 Bad Request
      *     {
-     *       "result": "fail",
-     *       "message": "User not found"
+     *       "success": false,
+     *       "message": "Wrong password or username!"
      *     }
      */
 
