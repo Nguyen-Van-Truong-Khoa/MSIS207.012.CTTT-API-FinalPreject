@@ -26,7 +26,7 @@ mongoose.connection.on("disconnected", () => {
 
 //middlewares
 app.use(cors({
-  origin: [`${process.env.clientURL}`,"http://localhost:3000", "https://msis-207-012-cttt-ui-client-final-preject-kt4e8t8pb.vercel.app/"],
+  origin: [`${process.env.clientURL}`,"http://localhost:3000", "https://msis-207-012-cttt-ui-client-final-preject-kt4e8t8pb.vercel.app/", "https://msis-207-012-cttt-ui-client-final-preject.vercel.app/"],
   credentials: true
   }))
 app.use(cookieParser())
