@@ -25,7 +25,10 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middlewares
-app.use(cors())
+app.use(cors({
+  origin: ["https://msis-207-012-cttt-ui-client-final-preject.vercel.app"],
+  credentials: true
+  }))
 app.use(cookieParser())
 app.use(express.json());
 
